@@ -92,6 +92,7 @@ Content-Type: application/json
 ```
 
 ### 5. Alteração de Situação da Conta
+
 Para alterar a situação de uma conta (por exemplo, "Paga", "Atrasada", etc.), utilize o endpoint PATCH /contas/{id}/situacao. O {id} é o identificador da conta, e a nova situação deve ser enviada no corpo da requisição.
 
 Exemplo de requisição para alterar a situação de uma conta:
