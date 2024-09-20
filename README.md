@@ -101,17 +101,12 @@ PATCH /contas/{id}/situacao
 Authorization: Bearer SEU_TOKEN_JWT
 Content-Type: application/json
 
-"Nova Situação"
-
-```
-Exemplo de resposta:
-```bash
 {
-  "total": 1500.00
+  "situacao": "Nova Situação"
 }
-```
 
-Essa requisição retorna o valor total pago no período especificado. Certifique-se de enviar o token JWT no cabeçalho da requisição para autenticação.
+```
+Lembre-se de substituir "Nova Situação" pelo novo status desejado, como "Paga" ou "Atrasada". Além disso, o token JWT deve ser incluído no cabeçalho de autorização para garantir que a requisição seja autenticada corretamente.
 
 ### 6. Obter o Valor Total Pago
 
@@ -123,6 +118,13 @@ Para obter o valor total pago de contas dentro de um intervalo de datas, utilize
 GET /contas/total-pago?dataInicio=2024-01-01&dataFim=2024-12-31
 Authorization: Bearer SEU_TOKEN_JWT
 ```
+Exemplo de resposta:
+```bash
+{
+  "total": 1500.00
+}
+```
+Essa requisição retorna o valor total pago no período especificado. Certifique-se de enviar o token JWT no cabeçalho da requisição para autenticação.
 
 ### 7. Importação de Contas
 Envie uma requisição POST para /contas/importar com um arquivo no corpo da requisição.
