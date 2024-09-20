@@ -59,10 +59,14 @@ Envie uma requisição POST para /contas com os dados da conta:
 }
 ```
 
-### 3.  Listagem de Contas
-Envie uma requisição GET para /contas com parâmetros opcionais:
+### 3. Listar Contas com Paginação e Filtros
+Para listar as contas, você pode utilizar o endpoint `GET /contas`, que aceita parâmetros de paginação e filtros opcionais como data de vencimento e descrição.
+
+#### Exemplo de requisição para listar contas:
+
 ```bash
-/contas?page=0&size=10&dataVencimentoInicio=2024-01-01&dataVencimentoFim=2024-12-31&descricao=Luz
+GET /contas?page=0&size=10&dataVencimentoInicio=2024-01-01&dataVencimentoFim=2024-12-31&descricao=a
+Authorization: Bearer SEU_TOKEN_JWT
 ```
 
 ### 4.Alteração de Conta
@@ -95,10 +99,31 @@ Content-Type: application/json
 "Nova Situação"
 
 ```
+Exemplo de resposta:
+```bash
+{
+  "total": 1500.00
+}
+```
 
-### 6. Importação de Contas
+Essa requisição retorna o valor total pago no período especificado. Certifique-se de enviar o token JWT no cabeçalho da requisição para autenticação.
+
+### 6. Obter o Valor Total Pago
+
+Para obter o valor total pago de contas dentro de um intervalo de datas, utilize o endpoint `GET /contas/total-pago`. Nesse endpoint, você deve informar as datas de início e fim do intervalo como parâmetros de consulta.
+
+#### Exemplo de requisição para obter o valor total pago:
+
+```bash
+GET /contas/total-pago?dataInicio=2024-01-01&dataFim=2024-12-31
+Authorization: Bearer SEU_TOKEN_JWT
+```
+
+### 7. Importação de Contas
 Envie uma requisição POST para /contas/importar com um arquivo no corpo da requisição.
 
+## Observações
+As datas devem ser informadas no formato YYYY-MM-DD
 
 ## Executando o projeto com Docker
 
