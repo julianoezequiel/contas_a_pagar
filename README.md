@@ -29,13 +29,13 @@ A aplicação foi projetada seguindo boas práticas de desenvolvimento, como DDD
 
 ## Instalação
 
-###1. Clone o repositório:
+### 1. Clone o repositório:
    ```bash
    git clone https://github.com/julianoezequiel/contas_a_pagar.git
 ```
-###2. Navegue até o diretório do projeto:
+### 2. Navegue até o diretório do projeto:
   cd contas_a_pagar
-###3. Configure o banco de dados PostgreSQL e atualize as configurações no arquivo
+### 3. Configure o banco de dados PostgreSQL e atualize as configurações no arquivo
 
 ## Uso
 
