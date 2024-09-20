@@ -121,13 +121,21 @@ Authorization: Bearer SEU_TOKEN_JWT
 Exemplo de resposta:
 ```bash
 {
-  "total": 1500.00
+  "valorTotalPago": 1500.00
 }
 ```
 Essa requisição retorna o valor total pago no período especificado. Certifique-se de enviar o token JWT no cabeçalho da requisição para autenticação.
 
 ### 7. Importação de Contas
 Envie uma requisição POST para /contas/importar com um arquivo no corpo da requisição.
+
+Exemplo de resposta:
+```json
+{
+    "message": "Contas importadas com sucesso!",
+    "status": 200
+}
+```
 
 ## Observações
 As datas devem ser informadas no formato YYYY-MM-DD
