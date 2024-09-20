@@ -8,15 +8,15 @@ A aplicação foi projetada seguindo boas práticas de desenvolvimento, como DDD
 
 ## Tecnologias e Padrões Utilizados:
 
-- **Java 17: Linguagem de programação robusta e amplamente utilizada no mercado corporativo.
-- **Spring Boot: Framework para simplificar o desenvolvimento e a configuração da aplicação.
-- **Spring Security: Para autenticação e autorização com JWT.
-- **Docker: Facilita a criação de ambientes de desenvolvimento consistentes e isolados.
-- **PostgreSQL: Banco de dados relacional utilizado para armazenar as contas a pagar.
-- **Flyway: Ferramenta de migração de banco de dados para controle de versões de schema.
-- **JPA/Hibernate: Para mapeamento objeto-relacional e persistência de dados.
-- **JUnit: Framework de testes utilizado para garantir a qualidade e integridade do código.
-- **Mockito: Ferramenta para criação de mocks e simulação de comportamentos em testes unitários, permitindo a validação de integrações entre os componentes da aplicação.
+- **Java 17: Linguagem de programação robusta e amplamente utilizada no mercado corporativo.**
+- **Spring Boot: Framework para simplificar o desenvolvimento e a configuração da aplicação.**
+- **Spring Security: Para autenticação e autorização com JWT.**
+- **Docker: Facilita a criação de ambientes de desenvolvimento consistentes e isolados.**
+- **PostgreSQL: Banco de dados relacional utilizado para armazenar as contas a pagar.**
+- **Flyway: Ferramenta de migração de banco de dados para controle de versões de schema.**
+- **JPA/Hibernate: Para mapeamento objeto-relacional e persistência de dados.**
+- **JUnit: Framework de testes utilizado para garantir a qualidade e integridade do código.**
+- **Mockito: Ferramenta para criação de mocks e simulação de comportamentos em testes unitários, permitindo a validação de integrações entre os componentes da aplicação.**
 - 
 ## Funcionalidades principais:
 
