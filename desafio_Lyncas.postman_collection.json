@@ -1,0 +1,275 @@
+{
+	"info": {
+		"_postman_id": "0c19d2a5-49da-469c-934f-3947239b40ee",
+		"name": "desafio_Lyncas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "273256"
+	},
+	"item": [
+		{
+			"name": "consulta paginada",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c3VhcmlvX2Rlc2FmaW8iLCJleHAiOjE3MjY4ODI3ODQsImlhdCI6MTcyNjg0Njc4NH0.ORUuP5avNxcE8t44rkLAfLvSR-kRZaP2YvyoAOLnlh0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/contas?page=0&size=10&dataVencimentoInicio=2024-01-01&dataVencimentoFim=2024-12-31&descricao=a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contas"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "dataVencimentoInicio",
+							"value": "2024-01-01"
+						},
+						{
+							"key": "dataVencimentoFim",
+							"value": "2024-12-31"
+						},
+						{
+							"key": "descricao",
+							"value": "a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cadastrar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c3VhcmlvX2Rlc2FmaW8iLCJleHAiOjE3MjY4ODI3ODQsImlhdCI6MTcyNjg0Njc4NH0.ORUuP5avNxcE8t44rkLAfLvSR-kRZaP2YvyoAOLnlh0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"dataVencimento\": \"2024-10-01\",\r\n  \"dataPagamento\": \"2024-09-25\",\r\n  \"valor\": 350.75,\r\n  \"descricao\": \"Conta de Internet\",\r\n  \"situacao\": \"PAGA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/contas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contas"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "total pago período",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c3VhcmlvX2Rlc2FmaW8iLCJleHAiOjE3MjY4ODI3ODQsImlhdCI6MTcyNjg0Njc4NH0.ORUuP5avNxcE8t44rkLAfLvSR-kRZaP2YvyoAOLnlh0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/contas/total-pago?dataInicio=2024-01-01&dataFim=2024-12-31",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contas",
+						"total-pago"
+					],
+					"query": [
+						{
+							"key": "dataInicio",
+							"value": "2024-01-01"
+						},
+						{
+							"key": "dataFim",
+							"value": "2024-12-31"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "importar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c3VhcmlvX2Rlc2FmaW8iLCJleHAiOjE3MjY4ODI3ODQsImlhdCI6MTcyNjg0Njc4NH0.ORUuP5avNxcE8t44rkLAfLvSR-kRZaP2YvyoAOLnlh0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/D/projetos/contasapagar/contas.csv"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/contas/importar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contas",
+						"importar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "alterar conta",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c3VhcmlvX2Rlc2FmaW8iLCJleHAiOjE3MjY4ODI3ODQsImlhdCI6MTcyNjg0Njc4NH0.ORUuP5avNxcE8t44rkLAfLvSR-kRZaP2YvyoAOLnlh0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"dataVencimento\": \"2024-10-10\",\r\n  \"dataPagamento\": \"2024-10-05\",\r\n  \"valor\": 250.00,\r\n  \"descricao\": \"Conta de Internet\",\r\n  \"situacao\": \"PENDENTE\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/contas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "alterar situação",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c3VhcmlvX2Rlc2FmaW8iLCJleHAiOjE3MjY4ODI3ODQsImlhdCI6MTcyNjg0Njc4NH0.ORUuP5avNxcE8t44rkLAfLvSR-kRZaP2YvyoAOLnlh0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"situacao\": \"PAGA\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/contas/1/situacao",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contas",
+						"1",
+						"situacao"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "autenticação",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"usuario_desafio\",\r\n    \"password\": \"senha_desafio\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/authenticate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
