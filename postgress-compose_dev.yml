@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:13
+    container_name: postgres_desafio
+    environment:
+      POSTGRES_DB: contas
+      POSTGRES_USER: usuario_desafio
+      POSTGRES_PASSWORD: senha_desafio
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - desafio_network
+
+volumes:
+  postgres_data:
+
+networks:
+  desafio_network:

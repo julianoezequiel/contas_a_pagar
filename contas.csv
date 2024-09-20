@@ -1,0 +1,6 @@
+data_vencimento,data_pagamento,valor,descricao,situacao
+2024-09-20,2024-09-18,1500.00,Conta de Luz,PENDENTE
+2024-09-25,,2000.50,Conta de Água,PENDENTE
+2024-09-15,2024-09-16,500.00,Internet,PAGA
+2024-09-10,,300.00,Telefone,PENDENTE
+2024-09-30,,1200.00,Aluguel,PENDENTE

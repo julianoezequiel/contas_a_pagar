@@ -1,0 +1,21 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: usuario_desafio
+      POSTGRES_PASSWORD: senha_desafio
+      POSTGRES_DB: contas
+    ports:
+      - "5432:5432"
+
+  app:
+    build: .
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/contas
+      SPRING_DATASOURCE_USERNAME: usuario_desafio
+      SPRING_DATASOURCE_PASSWORD: senha_desafio
+    ports:
+      - "8080:8080"
