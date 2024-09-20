@@ -17,7 +17,7 @@ A aplicação foi projetada seguindo boas práticas de desenvolvimento, como DDD
 - **JPA/Hibernate: Para mapeamento objeto-relacional e persistência de dados.**
 - **JUnit: Framework de testes utilizado para garantir a qualidade e integridade do código.**
 - **Mockito: Ferramenta para criação de mocks e simulação de comportamentos em testes unitários, permitindo a validação de integrações entre os componentes da aplicação.**
-- 
+
 ## Funcionalidades principais:
 
 - Cadastro de Contas: Os usuários podem cadastrar novas contas com detalhes como descrição, valor e data de vencimento.
