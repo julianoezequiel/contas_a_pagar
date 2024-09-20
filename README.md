@@ -61,11 +61,42 @@ Envie uma requisição POST para /contas com os dados da conta:
 
 ### 3.  Listagem de Contas
 Envie uma requisição GET para /contas com parâmetros opcionais:
-```
+```bash
 /contas?page=0&size=10&dataVencimentoInicio=2024-01-01&dataVencimentoFim=2024-12-31&descricao=Luz
 ```
 
-### 4. Importação de Contas
+### 4.Alteração de Conta
+
+Para alterar as informações de uma conta existente, utilize o endpoint `PUT /contas/{id}`. O `{id}` deve ser o identificador da conta que deseja atualizar.
+
+#### Exemplo de requisição para alterar uma conta:
+
+```bash
+PUT /contas/{id}
+Authorization: Bearer SEU_TOKEN_JWT
+Content-Type: application/json
+
+{
+  "descricao": "Nova descrição da conta",
+  "valor": 500.00,
+  "dataVencimento": "2024-12-31"
+}
+```
+
+### 5. Alteração de Situação da Conta
+Para alterar a situação de uma conta (por exemplo, "Paga", "Atrasada", etc.), utilize o endpoint PATCH /contas/{id}/situacao. O {id} é o identificador da conta, e a nova situação deve ser enviada no corpo da requisição.
+
+Exemplo de requisição para alterar a situação de uma conta:
+```bash
+PATCH /contas/{id}/situacao
+Authorization: Bearer SEU_TOKEN_JWT
+Content-Type: application/json
+
+"Nova Situação"
+
+```
+
+### 6. Importação de Contas
 Envie uma requisição POST para /contas/importar com um arquivo no corpo da requisição.
 
 
