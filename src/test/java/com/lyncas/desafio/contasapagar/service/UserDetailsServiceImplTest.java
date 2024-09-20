@@ -7,7 +7,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.test.context.ActiveProfiles;
 
 /**
  * @version 1.0.0 data 20/09/2024
@@ -15,6 +17,8 @@ import org.springframework.security.core.userdetails.UserDetails;
  *
  * @author juliano.ezequiel
  */
+@SpringBootTest
+@ActiveProfiles("test")
 class UserDetailsServiceImplTest {
 
 	@InjectMocks

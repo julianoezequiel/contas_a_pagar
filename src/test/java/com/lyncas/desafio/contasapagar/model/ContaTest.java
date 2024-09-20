@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 /**
  * @version 1.0.0 data 20/09/2024
@@ -13,6 +15,8 @@ import org.junit.jupiter.api.Test;
  *
  * @author juliano.ezequiel
  */
+@SpringBootTest
+@ActiveProfiles("test")
 class ContaTest {
 
 	@Test

@@ -86,8 +86,15 @@ public class ContaService {
 	 */
 	public Page<Conta> listarContas(Pageable pageable, LocalDate dataVencimentoInicio, LocalDate dataVencimentoFim,
 			String descricao) {
-		return contaRepository.findByDataVencimentoBetweenAndDescricaoContaining(dataVencimentoInicio,
-				dataVencimentoFim, descricao, pageable);
+
+		if (descricao == null || descricao.isBlank()) {
+			// Busca sem filtro de descrição
+			return contaRepository.findByDataVencimentoBetween(dataVencimentoInicio, dataVencimentoFim, pageable);
+		} else {
+			// Busca com filtro de descrição
+			return contaRepository.findByDataVencimentoBetweenAndDescricaoContaining(dataVencimentoInicio,
+					dataVencimentoFim, descricao, pageable);
+		}
 	}
 
 	/**

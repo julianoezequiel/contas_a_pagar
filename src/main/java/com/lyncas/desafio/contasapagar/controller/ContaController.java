@@ -7,10 +7,6 @@ import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import com.lyncas.desafio.contasapagar.model.Conta;
-import com.lyncas.desafio.contasapagar.service.ContaService;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.lyncas.desafio.contasapagar.dto.ApiResponse;
+import com.lyncas.desafio.contasapagar.dto.ValorTotalPagoResponse;
+import com.lyncas.desafio.contasapagar.model.Conta;
+import com.lyncas.desafio.contasapagar.service.ContaService;
 
 /**
  * Controlador responsável pelas operações relacionadas às contas a pagar.
@@ -106,10 +107,11 @@ public class ContaController {
 	 * @return a resposta contendo o valor total pago
 	 */
 	@GetMapping("/total-pago")
-	public ResponseEntity<BigDecimal> obterValorTotalPago(@RequestParam LocalDate dataInicio,
+	public ResponseEntity<ValorTotalPagoResponse> obterValorTotalPago(@RequestParam LocalDate dataInicio,
 			@RequestParam LocalDate dataFim) {
 		BigDecimal total = contaService.obterValorTotalPago(dataInicio, dataFim);
-		return ResponseEntity.ok(total);
+		ValorTotalPagoResponse response = new ValorTotalPagoResponse(total);
+		return ResponseEntity.ok(response);
 	}
 
 	/**
@@ -119,13 +121,15 @@ public class ContaController {
 	 * @return uma mensagem de sucesso ou erro dependendo do resultado da importação
 	 */
 	@PostMapping("/importar")
-	public ResponseEntity<String> importarContas(@RequestParam("file") MultipartFile file) {
+	public ResponseEntity<ApiResponse> importarContas(@RequestParam("file") MultipartFile file) {
 		try {
 			contaService.importarContas(file);
-			return ResponseEntity.ok("Contas importadas com sucesso!");
+			ApiResponse response = new ApiResponse("Contas importadas com sucesso!", HttpStatus.OK.value());
+			return ResponseEntity.ok(response);
 		} catch (IOException e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body("Erro ao importar contas: " + e.getMessage());
+			ApiResponse errorResponse = new ApiResponse("Erro ao importar contas: " + e.getMessage(),
+					HttpStatus.INTERNAL_SERVER_ERROR.value());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
 		}
 	}
 }

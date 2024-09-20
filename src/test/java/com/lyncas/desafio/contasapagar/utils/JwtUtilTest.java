@@ -12,6 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -23,6 +25,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
  *
  * @author juliano.ezequiel
  */
+@SpringBootTest
+@ActiveProfiles("test")
 class JwtUtilTest {
 
 	@InjectMocks

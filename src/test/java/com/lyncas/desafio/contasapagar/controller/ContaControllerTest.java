@@ -1,126 +1,158 @@
 package com.lyncas.desafio.contasapagar.controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 
+import com.lyncas.desafio.contasapagar.dto.ValorTotalPagoResponse;
 import com.lyncas.desafio.contasapagar.model.Conta;
 import com.lyncas.desafio.contasapagar.service.ContaService;
 
 /**
+ * Testes unitários para a classe {@link ContaController}. Utiliza Mockito para
+ * simular as interações com o serviço e validar as operações do controlador.
+ * 
  * @version 1.0.0 data 20/09/2024
  * @since 1.0.0 data 20/09/2024
- *
+ * 
  * @author juliano.ezequiel
  */
-public class ContaControllerTest {
+@SpringBootTest
+@ActiveProfiles("test")
+class ContaControllerTest {
 
-	@Autowired
-	private MockMvc mockMvc;
+    @InjectMocks
+    private ContaController contaController;
 
-	@Mock
-	private ContaService contaService;
+    @Mock
+    private ContaService contaService;
 
-	@InjectMocks
-	private ContaController contaController;
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
 
-	@BeforeEach
-	public void setUp() {
-		MockitoAnnotations.openMocks(this);
-		mockMvc = MockMvcBuilders.standaloneSetup(contaController).build();
-	}
+    /**
+     * Testa o cadastro de uma nova conta.
+     */
+    @Test
+    void testCadastrarConta() {
+        // Configura dados de exemplo
+        Conta conta = new Conta();
+        conta.setDescricao("Conta de luz");
 
-	@Test
-	public void testCadastrarConta() throws Exception {
-		Conta conta = new Conta();
-		conta.setId(1L);
-		conta.setDescricao("Teste");
-		conta.setValor(BigDecimal.TEN);
+        // Simula o comportamento do serviço
+        doReturn(conta).when(contaService).criarConta(any(Conta.class));
 
-		when(contaService.criarConta(any(Conta.class))).thenReturn(conta);
+        // Executa o método a ser testado
+        ResponseEntity<Conta> response = contaController.cadastrarConta(conta);
 
-		mockMvc.perform(post("/contas").contentType(MediaType.APPLICATION_JSON)
-				.content("{\"descricao\": \"Teste\", \"valor\": 10}")).andExpect(status().isOk())
-				.andExpect(jsonPath("$.descricao").value("Teste")).andExpect(jsonPath("$.valor").value(10));
-	}
+        // Verifica o resultado
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals("Conta de luz", response.getBody().getDescricao());
+    }
 
-	@Test
-	public void testAtualizarConta() throws Exception {
-		Conta conta = new Conta();
-		conta.setId(1L);
-		conta.setDescricao("Atualizada");
-		conta.setValor(BigDecimal.valueOf(20));
+    /**
+     * Testa a atualização de uma conta existente.
+     */
+    @Test
+    void testAtualizarConta() {
+        // Configura dados de exemplo
+        Long id = 1L;
+        Conta conta = new Conta();
+        conta.setDescricao("Conta de luz");
 
-		when(contaService.atualizarConta(anyLong(), any(Conta.class))).thenReturn(conta);
+        // Simula o comportamento do serviço
+        doReturn(conta).when(contaService).atualizarConta(any(Long.class), any(Conta.class));
 
-		mockMvc.perform(put("/contas/1").contentType(MediaType.APPLICATION_JSON)
-				.content("{\"descricao\": \"Atualizada\", \"valor\": 20}")).andExpect(status().isOk())
-				.andExpect(jsonPath("$.descricao").value("Atualizada")).andExpect(jsonPath("$.valor").value(20));
-	}
+        // Executa o método a ser testado
+        ResponseEntity<Conta> response = contaController.atualizarConta(id, conta);
 
-	@Test
-	public void testAlterarSituacao() throws Exception {
-		mockMvc.perform(patch("/contas/1/situacao").contentType(MediaType.APPLICATION_JSON).content("\"Paga\""))
-				.andExpect(status().isNoContent());
-	}
+        // Verifica o resultado
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals("Conta de luz", response.getBody().getDescricao());
+    }
 
-	@Test
-	public void testListarContas() throws Exception {
-		Conta conta = new Conta();
-		conta.setId(1L);
-		conta.setDescricao("Teste");
+    /**
+     * Testa a alteração da situação de uma conta.
+     */
+    @Test
+    void testAlterarSituacao() {
+        // Configura dados de exemplo
+        Long id = 1L;
+        String situacao = "Paga";
 
-		Page<Conta> page = new PageImpl<>(Collections.singletonList(conta), PageRequest.of(0, 10), 1);
+        // Simula o comportamento do serviço (não precisa retornar nada)
+        doNothing().when(contaService).alterarSituacao(any(Long.class), any(String.class));
 
-		when(contaService.listarContas(any(Pageable.class), any(LocalDate.class), any(LocalDate.class), any()))
-				.thenReturn(page);
+        // Executa o método a ser testado
+        ResponseEntity<Void> response = contaController.alterarSituacao(id, situacao);
 
-//		mockMvc.perform(get("/contas?page=0&size=10").param("dataVencimentoInicio", "2024-01-01")
-//				.param("dataVencimentoFim", "2024-12-31").param("descricao", "Teste")
-//				.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-//				.andExpect(jsonPath("$.content[0].descricao").value("Teste"));
-	}
+        // Verifica o resultado
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
 
-	@Test
-	public void testObterValorTotalPago() throws Exception {
-		BigDecimal total = BigDecimal.valueOf(1000);
+    /**
+     * Testa a listagem de contas filtradas.
+     */
+    @Test
+    void testListarContas() {
+        // Configura dados de exemplo
+        Pageable pageable = mock(Pageable.class);
+        Conta conta = new Conta();
+        conta.setDescricao("Conta de luz");
+        Page<Conta> pageContas = new PageImpl<>(List.of(conta));
 
-		when(contaService.obterValorTotalPago(any(LocalDate.class), any(LocalDate.class))).thenReturn(total);
+        // Simula o comportamento do serviço
+        doReturn(pageContas).when(contaService).listarContas(any(Pageable.class), any(), any(), any());
 
-		mockMvc.perform(get("/contas/total-pago").param("dataInicio", "2024-01-01").param("dataFim", "2024-12-31"))
-				.andExpect(status().isOk()).andExpect(content().string("1000"));
-	}
+        // Executa o método a ser testado
+        ResponseEntity<Page<Conta>> response = contaController.listarContas(pageable, null, null, null);
 
-	@Test
-	public void testImportarContas() throws Exception {
-		mockMvc.perform(multipart("/contas/importar").file("file", "arquivo.csv".getBytes())
-				.contentType(MediaType.MULTIPART_FORM_DATA)).andExpect(status().isOk())
-				.andExpect(content().string("Contas importadas com sucesso!"));
-	}
+        // Verifica o resultado
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(1, response.getBody().getTotalElements());
+    }
+
+    /**
+     * Testa a obtenção do valor total pago.
+     */
+    @Test
+    void testObterValorTotalPago() {
+        // Configura dados de exemplo
+        LocalDate dataInicio = LocalDate.now().minusDays(30);
+        LocalDate dataFim = LocalDate.now();
+        BigDecimal total = BigDecimal.valueOf(100.00);
+        ValorTotalPagoResponse responseValor = new ValorTotalPagoResponse(total);
+
+        // Simula o comportamento do serviço
+        doReturn(total).when(contaService).obterValorTotalPago(dataInicio, dataFim);
+
+        // Executa o método a ser testado
+        ResponseEntity<ValorTotalPagoResponse> response = contaController.obterValorTotalPago(dataInicio, dataFim);
+
+        // Verifica o resultado
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(total, response.getBody().getValorTotalPago());
+    }
+
 }

@@ -11,10 +11,12 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.lyncas.desafio.contasapagar.dto.AuthenticationRequest;
 import com.lyncas.desafio.contasapagar.utils.JwtUtil;
@@ -25,6 +27,8 @@ import com.lyncas.desafio.contasapagar.utils.JwtUtil;
  *
  * @author juliano.ezequiel
  */
+@SpringBootTest
+@ActiveProfiles("test")
 class AuthenticationControllerTest {
 
 	@Mock

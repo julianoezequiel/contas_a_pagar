@@ -44,4 +44,16 @@ public interface ContaRepository extends JpaRepository<Conta, Long> {
 	 * @return uma lista de contas pagas que atendem ao intervalo de datas
 	 */
 	List<Conta> findByDataPagamentoBetween(LocalDate dataInicio, LocalDate dataFim);
+
+	/**
+	 * Busca uma página de contas que possuem uma data de vencimento entre duas
+	 * datas específicas.
+	 * 
+	 * @param dataVencimentoInicio a data inicial do intervalo de vencimento
+	 * @param dataVencimentoFim    a data final do intervalo de vencimento
+	 * @param pageable             informações de paginação
+	 * @return uma página de contas que atendem aos critérios especificados
+	 */
+	Page<Conta> findByDataVencimentoBetween(LocalDate dataVencimentoInicio, LocalDate dataVencimentoFim,
+			Pageable pageable);
 }

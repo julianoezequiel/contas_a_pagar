@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.test.context.ActiveProfiles;
 
 /**
  * @version 1.0.0 data 20/09/2024
@@ -15,6 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
  * @author juliano.ezequiel
  */
 @SpringBootTest
+@ActiveProfiles("test")
 class SecurityConfigTest {
 
 	@Autowired

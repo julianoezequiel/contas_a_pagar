@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.lyncas.desafio.contasapagar.utils.JwtUtil;
 
@@ -21,6 +23,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author juliano.ezequiel
  */
+@SpringBootTest
+@ActiveProfiles("test")
 class JwtRequestFilterTest {
 
 	@InjectMocks
