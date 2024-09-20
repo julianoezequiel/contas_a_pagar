@@ -2,27 +2,30 @@
 
 ## Descrição
 
-O projeto "Contas a Pagar" é uma aplicação desenvolvida em Java utilizando o Spring Boot. O objetivo da aplicação é gerenciar contas a pagar de forma eficiente, permitindo aos usuários cadastrar, atualizar, listar e importar contas através de um arquivo. A aplicação também oferece a funcionalidade de consultar o total de contas pagas em um intervalo de datas.
+O projeto "Contas a Pagar" é uma aplicação desenvolvida em Java, utilizando o framework Spring Boot, com o propósito de demonstrar o uso de tecnologias modernas e padrões de arquitetura de software. Ele oferece um sistema para gerenciar de forma eficiente o ciclo de vida de contas a pagar, desde o cadastro até a consulta de valores pagos em determinado período.
 
-## Tecnologias Utilizadas
+A aplicação foi projetada seguindo boas práticas de desenvolvimento, como DDD (Domain-Driven Design) e injeção de dependências. Ela utiliza uma arquitetura de APIs RESTful, garantindo segurança e escalabilidade através da implementação de JWT (JSON Web Token) para autenticação e autorização dos usuários.
 
-- **Java 17**
-- **Spring Boot**
-- **Spring Security**
-- **Spring Data JPA**
-- **PostgreSQL**
-- **JUnit**
-- **Mockito**
-- **Maven**
+## Tecnologias e Padrões Utilizados:
 
-## Funcionalidades
+- **Java 17: Linguagem de programação robusta e amplamente utilizada no mercado corporativo.
+- **Spring Boot: Framework para simplificar o desenvolvimento e a configuração da aplicação.
+- **Spring Security: Para autenticação e autorização com JWT.
+- **Docker: Facilita a criação de ambientes de desenvolvimento consistentes e isolados.
+- **PostgreSQL: Banco de dados relacional utilizado para armazenar as contas a pagar.
+- **Flyway: Ferramenta de migração de banco de dados para controle de versões de schema.
+- **JPA/Hibernate: Para mapeamento objeto-relacional e persistência de dados.
+- **JUnit: Framework de testes utilizado para garantir a qualidade e integridade do código.
+- **Mockito: Ferramenta para criação de mocks e simulação de comportamentos em testes unitários, permitindo a validação de integrações entre os componentes da aplicação.
+- 
+## Funcionalidades principais:
 
-- Cadastro de novas contas.
-- Atualização de contas existentes.
-- Alteração da situação de uma conta.
-- Listagem de contas pagas com filtros de data e descrição.
-- Importação de contas a partir de um arquivo.
-- Autenticação de usuários com JWT.
+- Cadastro de Contas: Os usuários podem cadastrar novas contas com detalhes como descrição, valor e data de vencimento.
+- Atualização de Contas: Permite atualizar os dados das contas existentes.
+- Alteração de Situação: Altera o status de uma conta (paga, pendente, etc.).
+- Listagem e Consulta de Contas: A aplicação oferece a possibilidade de listar todas as contas pagas ou pendentes com filtros por data e descrição.
+- Importação de Contas via Arquivo: É possível importar contas em massa através de arquivos.
+- Consulta de Total Pago: Realiza a consulta do valor total pago em um intervalo de datas definido pelo usuário.
 
 ## Instalação
 
